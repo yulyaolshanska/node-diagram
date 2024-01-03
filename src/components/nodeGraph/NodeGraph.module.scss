@@ -1,0 +1,21 @@
+.customNode {
+  display: inline-block;
+  width: 240px;
+  min-height: 140px;
+  background-color: #d1e7dd;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.nodeContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nodeTextarea {
+  height: 89px;
+  resize: none;
+  border-radius: 4px;
+  outline: none;
+}
