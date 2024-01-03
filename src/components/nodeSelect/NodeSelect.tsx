@@ -1,4 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
+import {
+  addNode,
+  removeNode,
+  setSelectedValues,
+} from '../../redux/slices/nodeSlice'
+import { useAppDispatch } from '../../redux/store'
 import { SelectOption } from '../../types/interface'
 import styles from './NodeSelect.module.scss'
 
@@ -15,9 +21,33 @@ const NodeSelect: React.FC<NodeSelectProps> = ({
   selectedValues,
   placeholder,
 }) => {
+  const dispatch = useAppDispatch()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const selectedValuesRef = useRef<HTMLDivElement>(null)
+
+  const onChange = (str: string[]) => {
+    if (
+      selectedValues &&
+      selectedValues.every((elem, index) => elem === str[index])
+    ) {
+      dispatch(addNode({ str, id }))
+    } else {
+      const differences: string = selectedValues
+        .filter((item) => !str.includes(item))[0]
+        .split(' ')[1]
+      dispatch(removeNode(differences))
+    }
+  }
+
+  const handleOptionClick = (value: string) => {
+    const updatedSelectedValues = selectedValues.includes(value)
+      ? selectedValues.filter((v) => v !== value)
+      : [...selectedValues, value]
+
+    dispatch(setSelectedValues({ id, updatedSelectedValues }))
+    onChange(updatedSelectedValues)
+  }
 
   const handleToggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen)
@@ -64,6 +94,7 @@ const NodeSelect: React.FC<NodeSelectProps> = ({
                 type="checkbox"
                 value={option.value}
                 checked={selectedValues.includes(option.value)}
+                onChange={() => handleOptionClick(option.value)}
               />
               {option.label}
             </label>
