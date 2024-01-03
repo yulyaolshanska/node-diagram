@@ -1,6 +1,6 @@
 // src/components/NodeGraph.tsx
 import React, { useCallback, useState } from 'react'
-import { useStoreSelector, useAppDispatch } from '../../store/index'
+import { useStoreSelector, useAppDispatch } from '../../redux/store/index'
 import ReactFlow, {
   addEdge,
   FitViewOptions,
@@ -15,6 +15,7 @@ import ReactFlow, {
   NodeTypes,
 } from 'reactflow'
 import 'reactflow/dist/style.css'
+import NodeSelect from '../nodeSelect/NodeSelect'
 
 const initialNodes: Node[] = [
   { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
@@ -34,7 +35,7 @@ const fitViewOptions: FitViewOptions = {
   padding: 0.2,
 }
 
-const NodeGraph: React.FC = () => {
+const NodeGraph: React.FC = ({ id, data, isConnectable }) => {
   const [nodes, setNodes] = useState<Node[]>(initialNodes)
   const [edges, setEdges] = useState<Edge[]>(initialEdges)
 
@@ -63,6 +64,12 @@ const NodeGraph: React.FC = () => {
         fitViewOptions={fitViewOptions}
         defaultEdgeOptions={defaultEdgeOptions}
         // nodeTypes={nodeTypes}
+      />
+      <NodeSelect
+        options={data.options}
+        selectedValues={data.selectedValues}
+        placeholder={data.placeholder}
+        id={id}
       />
     </div>
   )

@@ -1,6 +1,6 @@
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
-import { ReactFlowNode } from '../types/ReactFlowNode'
+import { ReactFlowNode } from '../../types/ReactFlowNode'
 
 interface AppState {
   elements: ReactFlowNode[]

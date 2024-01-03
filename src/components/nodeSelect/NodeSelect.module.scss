@@ -1,0 +1,43 @@
+.selectContainer {
+  display: inline-block;
+  position: relative;
+}
+
+.selectedValues {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.selectOptions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 4px;
+}
+
+.selectOption {
+  display: block;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+.arrow.open {
+  transform: rotate(180deg);
+}
