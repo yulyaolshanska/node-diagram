@@ -1,41 +1,42 @@
-import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
-import { ReactFlowNode } from '../../types/ReactFlowNode'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import nodeReducer from '../nodeSlice'
 
-interface AppState {
-  elements: ReactFlowNode[]
-  selectedNodeValue: string
-}
-
-const initialState: AppState = {
-  elements: JSON.parse(localStorage.getItem('nodePositions') || '[]'),
-  selectedNodeValue: '',
-}
-
-const appSlice = createSlice({
-  name: 'app',
-  initialState,
-  reducers: {
-    setElements: (state, action: PayloadAction<ReactFlowNode[]>) => {
-      state.elements = action.payload
-    },
-    setSelectedNodeValue: (state, action: PayloadAction<string>) => {
-      state.selectedNodeValue = action.payload
-    },
-  },
+const rootReduser = combineReducers({
+  nodes: nodeReducer,
 })
 
-export const { setElements, setSelectedNodeValue } = appSlice.actions
+const persistConfig = {
+  key: 'root',
+  storage,
+}
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
-export const useStoreSelector = (state: RootState) => state.app
-export const useAppDispatch = () => useDispatch<AppDispatch>()
+const persistedReducer = persistReducer(persistConfig, rootReduser)
 
 const store = configureStore({
-  reducer: {
-    app: appSlice.reducer,
-  },
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 })
 
+type AppDispatch = typeof store.dispatch
+
+export type RootState = ReturnType<typeof store.getState>
+export const useAppDispatch = () => useDispatch<AppDispatch>()
+export const persistor = persistStore(store)
 export default store
