@@ -11,7 +11,7 @@ import {
   REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import nodeReducer from '../nodeSlice'
+import nodeReducer from '../slices/nodeSlice'
 
 const rootReduser = combineReducers({
   nodes: nodeReducer,
