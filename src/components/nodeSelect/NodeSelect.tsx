@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { SelectOption } from '../../types/SelectOption'
+import { SelectOption } from '../../types/interface'
 import styles from './NodeSelect.module.scss'
 
 interface NodeSelectProps {
@@ -54,9 +54,7 @@ const NodeSelect: React.FC<NodeSelectProps> = ({
             ? placeholder
             : selectedValues.join(', ')}
         </span>
-        <span className={`arrow ${isDropdownOpen ? 'open' : ''}`}>
-          &#2C7DFA;
-        </span>
+        <span className={`arrow ${isDropdownOpen ? 'open' : ''}`}>&#9662;</span>
       </div>
       {isDropdownOpen && (
         <div ref={dropdownRef} className={styles.selectOptions}>
