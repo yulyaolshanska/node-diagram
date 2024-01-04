@@ -29,7 +29,7 @@ const NodeGraph: React.FC<NodeProps> = ({ id, data, isConnectable }) => {
       <Handle
         type="source"
         position={id === '0' ? Position.Bottom : Position.Right}
-        style={id !== '0' ? { top: 130 } : { top: 'none' }}
+        style={id !== '0' ? { top: 115 } : { top: 'none' }}
         isConnectable={isConnectable}
       />
     </div>
