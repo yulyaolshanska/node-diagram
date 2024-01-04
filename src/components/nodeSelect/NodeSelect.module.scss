@@ -9,9 +9,12 @@
   gap: 16px;
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ccc;
+  border: 0.658px solid #479f76;
   border-radius: 4px;
   background-color: #fff;
+  color: #37352f;
+  font-size: 14px;
+  line-height: 1.7;
   cursor: pointer;
 
   &::after {
@@ -24,7 +27,6 @@
 
   &.open {
     &::after {
-      margin: 30px;
       transform: rotate(180deg);
     }
   }
@@ -47,17 +49,11 @@
   padding: 8px 12px;
   cursor: pointer;
   border-bottom: 1px solid #eaf2ff;
+  color: #37352f;
+  font-size: 14px;
+  line-height: 1.7;
 
   input {
     margin-right: 12px;
-  }
-}
-
-.arrow {
-  display: inline-block;
-  transition: transform 0.3s;
-
-  &.open {
-    transform: rotate(180deg);
   }
 }

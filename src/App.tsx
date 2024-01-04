@@ -24,7 +24,6 @@ const App: React.FC = () => {
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
-        fitView
       />
     </div>
   )
