@@ -5,7 +5,10 @@ import styles from './NodeGraph.module.scss'
 
 const NodeGraph: React.FC<NodeProps> = ({ id, data, isConnectable }) => {
   return (
-    <div className={`customNode ${data.selected ? 'selected' : ''}`} id={id}>
+    <div
+      className={`${styles.customNode} ${data.selected ? 'selected' : ''}`}
+      id={id}
+    >
       {id !== '0' && (
         <Handle
           type="target"
@@ -13,7 +16,7 @@ const NodeGraph: React.FC<NodeProps> = ({ id, data, isConnectable }) => {
           isConnectable={isConnectable}
         />
       )}
-      <div className="node-header">{data.label}</div>
+      <div className={styles.nodeHeader}>{data.label}</div>
       <div className={styles.nodeContent}>
         <textarea className={styles.nodeTextarea} />
         <NodeSelect
@@ -25,8 +28,8 @@ const NodeGraph: React.FC<NodeProps> = ({ id, data, isConnectable }) => {
       </div>
       <Handle
         type="source"
-        position={id === '0' ? Position.Right : Position.Bottom}
-        style={id === '0' ? { top: 116 } : { top: 'none' }}
+        position={id === '0' ? Position.Bottom : Position.Right}
+        style={id !== '0' ? { top: 130 } : { top: 'none' }}
         isConnectable={isConnectable}
       />
     </div>
