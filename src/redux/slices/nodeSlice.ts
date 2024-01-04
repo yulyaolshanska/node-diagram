@@ -18,8 +18,8 @@ export const nodeSlice = createSlice({
     addNode: addNodeReducer,
     removeNode: removeNodeReducer,
     setSelectedValues: setSelectedValuesReducer,
-    nodeChanged(state, actions) {
-      state.nodes = applyNodeChanges(actions.payload, state.nodes)
+    nodeChanged(state, action) {
+      state.nodes = applyNodeChanges(action.payload, state.nodes)
     },
   },
 })

@@ -5,12 +5,11 @@ import { INodes } from '../../types/interface'
 
 export const addNodeReducer = (
   state: { nodes: INodes[]; edges: any[] },
-  action: PayloadAction<{ str: string[]; id: string }>,
+  actions: PayloadAction<{ str: string[]; id: string }>,
 ) => {
-  const { str, id } = action.payload
-  const nodeIds = str.map((el) => el.split(' ')[1])
+  const nodeIds = actions.payload.str.map((el) => el.split(' ')[1])
   const edgeIds = nodeIds.map((id) => `${state.nodes.length}-${id}`)
-  const currentNode = state.nodes.find((node) => node.id === id)
+  const currentNode = state.nodes.find((node) => node.id === actions.payload.id)
 
   const nodeSpacing = 250
 
@@ -23,7 +22,7 @@ export const addNodeReducer = (
     },
     targetPosition: Position.Top,
     data: {
-      options: modifyOptions(str[index].split(' ')[1]),
+      options: modifyOptions(actions.payload.str[index].split(' ')[1]),
       placeholder: 'Вибрати значення',
       selectedValues: [],
     },
@@ -31,12 +30,10 @@ export const addNodeReducer = (
 
   const newEdge = edgeIds.map((id, index) => ({
     id,
-    source: id,
+    source: actions.payload.id,
     target: `${nodeIds[index]}`,
   }))
 
-  return {
-    nodes: [...state.nodes, ...newNode],
-    edges: [...state.edges, ...newEdge],
-  }
+  state.nodes = [...state.nodes, ...newNode]
+  state.edges = [...state.edges, ...newEdge]
 }
