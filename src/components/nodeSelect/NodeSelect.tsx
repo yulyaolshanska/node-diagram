@@ -76,7 +76,7 @@ const NodeSelect: React.FC<NodeSelectProps> = ({
     <div className={styles.selectContainer}>
       <div
         ref={selectedValuesRef}
-        className={styles.selectedValues}
+        className={`${styles.selectedValues} ${isDropdownOpen ? 'open' : ''}`}
         onClick={handleToggleDropdown}
       >
         <span>
@@ -84,7 +84,6 @@ const NodeSelect: React.FC<NodeSelectProps> = ({
             ? placeholder
             : selectedValues.join(', ')}
         </span>
-        <span className={`arrow ${isDropdownOpen ? 'open' : ''}`}>&#9662;</span>
       </div>
       {isDropdownOpen && (
         <div ref={dropdownRef} className={styles.selectOptions}>
@@ -95,6 +94,7 @@ const NodeSelect: React.FC<NodeSelectProps> = ({
                 value={option.value}
                 checked={selectedValues.includes(option.value)}
                 onChange={() => handleOptionClick(option.value)}
+                className={styles.selectInput}
               />
               {option.label}
             </label>

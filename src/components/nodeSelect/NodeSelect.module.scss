@@ -13,6 +13,21 @@
   border-radius: 4px;
   background-color: #fff;
   cursor: pointer;
+
+  &::after {
+    content: url('../../../public/icons/arrow_down.svg');
+    width: 24px;
+    height: 24px;
+    font-size: 18px;
+    transition: transform 0.3s;
+  }
+
+  &.open {
+    &::after {
+      margin: 30px;
+      transform: rotate(180deg);
+    }
+  }
 }
 
 .selectOptions {
@@ -24,20 +39,25 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: #fff;
-  padding: 4px;
 }
 
 .selectOption {
-  display: block;
-  padding: 4px;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
   cursor: pointer;
+  border-bottom: 1px solid #eaf2ff;
+
+  input {
+    margin-right: 12px;
+  }
 }
 
 .arrow {
   display: inline-block;
   transition: transform 0.3s;
-}
 
-.arrow.open {
-  transform: rotate(180deg);
+  &.open {
+    transform: rotate(180deg);
+  }
 }
