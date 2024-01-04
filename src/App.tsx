@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import ReactFlow, { OnNodesChange } from 'reactflow'
 import { RootState, useAppDispatch } from './redux/store'
@@ -24,6 +24,7 @@ const App: React.FC = () => {
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
+        fitView
       />
     </div>
   )
