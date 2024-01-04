@@ -14,6 +14,7 @@ const NodeGraph: React.FC<NodeProps> = ({ id, data, isConnectable }) => {
           type="target"
           position={Position.Top}
           isConnectable={isConnectable}
+          style={{ visibility: 'hidden' }}
         />
       )}
       <div className={styles.nodeHeader}>{data.label}</div>
@@ -29,7 +30,11 @@ const NodeGraph: React.FC<NodeProps> = ({ id, data, isConnectable }) => {
       <Handle
         type="source"
         position={id === '0' ? Position.Bottom : Position.Right}
-        style={id !== '0' ? { top: 115 } : { top: 'none' }}
+        style={
+          id !== '0'
+            ? { top: 115, background: '#ADB5BD' }
+            : { top: 'none', background: '#ADB5BD' }
+        }
         isConnectable={isConnectable}
       />
     </div>
