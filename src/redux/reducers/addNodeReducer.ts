@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { Position } from 'reactflow'
+import { MarkerType, Position } from 'reactflow'
 import { modifyOptions } from '../../helpers/modifyOptions'
 import { INodes } from '../../types/interface'
 
@@ -32,6 +32,10 @@ export const addNodeReducer = (
     id,
     source: actions.payload.id,
     target: `${nodeIds[index]}`,
+    type: 'smoothstep',
+    markerEnd: {
+      type: MarkerType.ArrowClosed,
+    },
   }))
 
   state.nodes = [...state.nodes, ...newNode]
